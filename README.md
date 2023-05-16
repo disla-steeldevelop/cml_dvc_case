@@ -28,5 +28,6 @@ Note that if you clone this project, you will have to configure your own DVC sto
 3. `git add`, `commit` and `push` to push your DVC configuration to GitHub.
 4. Add your storage credentials as repository secrets.
 5. Copy the workflow file `.github/workflows/cml.yaml` from this repository to your fork. By default, workflow files are not copied in forks. When you commit this file to your repository, the first workflow should be initiated. 
+6. Lets test it.
 
 
