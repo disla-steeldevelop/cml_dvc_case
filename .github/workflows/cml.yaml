@@ -7,7 +7,13 @@ jobs:
     runs-on: [ubuntu-latest]
 
     steps:
+      - uses: navikt/github-app-token-generator@v1
+        id: get-token
+        with:
+          private-key: ${{ secrets.CML_GITHUB_APP_PEM }}
+          app-id: ${{ secrets.CML_GITHUB_APP_ID }}
       - uses: actions/checkout@v3
+        token: ${{ steps.get-token.outputs.token }}
       - uses: actions/setup-python@v4
         with:
           python-version: '3.x'
@@ -17,7 +23,7 @@ jobs:
 
       - name: cml
         env:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          repo_token: ${{ steps.get-token.outputs.token }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
